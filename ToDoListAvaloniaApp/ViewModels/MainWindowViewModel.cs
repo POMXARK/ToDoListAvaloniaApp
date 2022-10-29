@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reactive.Linq;
 using ReactiveUI;
+using ToDoListAvaloniaApp.Data;
 using ToDoListAvaloniaApp.Models;
 using ToDoListAvaloniaApp.Services;
 
@@ -36,12 +37,15 @@ namespace ToDoListAvaloniaApp.ViewModels
                 .Take(1)
                 .Subscribe(model =>
                 {
+                    var db = new ApplicationContext();
+
                     if (model != null)
                     {
-                        List.Items.Add(model);
+                        db.TodoItems.Add(model);
+                        db.SaveChanges();
                     }
 
-                    Content = List;
+                    Content = new TodoListViewModel(db.TodoItems);
                 });
 
             Content = vm;
