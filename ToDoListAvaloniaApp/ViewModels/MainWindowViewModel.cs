@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Reactive.Linq;
 using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 using ToDoListAvaloniaApp.Data;
 using ToDoListAvaloniaApp.Models;
 using ToDoListAvaloniaApp.Services;
@@ -11,21 +12,12 @@ namespace ToDoListAvaloniaApp.ViewModels
     {
         //public string Greeting => "Welcome to Avalonia!";
 
-        ViewModelBase content;
+        [Reactive] public ViewModelBase Content { get; set; }
 
         public MainWindowViewModel(Database db)
         {
-            Content = List = new TodoListViewModel(db.GetItems());
+            Content = new TodoListViewModel(db.GetItems());
         }
-
-
-        public ViewModelBase Content
-        {
-            get => content;
-            private set => this.RaiseAndSetIfChanged(ref content, value);
-        }
-
-        public TodoListViewModel List { get; }
 
         public void AddItem()
         {

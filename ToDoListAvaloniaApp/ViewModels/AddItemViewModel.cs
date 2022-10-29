@@ -1,6 +1,7 @@
 ﻿
 
 using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 using System.Reactive;
 using ToDoListAvaloniaApp.Models;
 
@@ -8,7 +9,7 @@ namespace ToDoListAvaloniaApp.ViewModels
 {
     class AddItemViewModel : ViewModelBase
     {
-        string description;
+        [Reactive] public string Description { get; set; }
 
         public AddItemViewModel()
         {
@@ -22,11 +23,6 @@ namespace ToDoListAvaloniaApp.ViewModels
             Cancel = ReactiveCommand.Create(() => { });
         }
 
-        public string Description
-        {
-            get => description;
-            set => this.RaiseAndSetIfChanged(ref description, value);
-        }
 
         public ReactiveCommand<Unit, TodoItem> Ok { get; }
         public ReactiveCommand<Unit, Unit> Cancel { get; }
