@@ -8,7 +8,7 @@
         x:Class="ToDoListAvaloniaApp.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="Avalonia Todo"
-        Content="{Binding List}"
+        Content="{Binding Content}"
         >
   <!--
     <Design.DataContext>

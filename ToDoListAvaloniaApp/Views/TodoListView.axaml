@@ -6,7 +6,7 @@
              x:Class="ToDoListAvaloniaApp.Views.TodoListView">
   <DockPanel>
     <Button DockPanel.Dock="Bottom"
-            HorizontalAlignment="Center">
+            Command="{Binding $parent[Window].DataContext.AddItem}">
       Add an item
     </Button>
     <ItemsControl Items="{Binding Items}">
