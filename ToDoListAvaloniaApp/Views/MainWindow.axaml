@@ -8,14 +8,37 @@
         x:Class="ToDoListAvaloniaApp.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="Avalonia Todo"
-        Content="{Binding Content}"
         >
-  <!--
-    <Design.DataContext>
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
+  <Design.DataContext>
+    <vm:MainWindowViewModel/>
+  </Design.DataContext>
 
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-    -->
-  <views:TodoListView/>
+  <StackPanel>
+    
+    <ItemsControl 
+                  Items="{Binding AvailablePlayers}">
+      <ItemsControl.ItemTemplate>
+        <DataTemplate DataType="{x:Type vm:FootballPlayer}">
+          <Grid>
+            <TextBlock Text="{Binding Name}" />
+          </Grid>
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
+    </ItemsControl>
+    
+    <Label/>
+    
+    <ItemsControl
+              Items="{Binding AvailablePlayers}">
+      <ItemsControl.ItemTemplate>
+        <DataTemplate DataType="{x:Type vm:FootballPlayer}">
+          <Grid>
+            <TextBlock Text="{Binding Name}" />
+          </Grid>
+        </DataTemplate>
+      </ItemsControl.ItemTemplate>
+    </ItemsControl>
+
+  </StackPanel>
+  
 </Window>

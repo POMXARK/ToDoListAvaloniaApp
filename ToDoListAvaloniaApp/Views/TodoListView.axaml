@@ -12,7 +12,9 @@
     <ItemsControl Items="{Binding Items}">
       <ItemsControl.ItemTemplate>
         <DataTemplate>
+          <!--Command="{Binding $parent[Window].DataContext.ChengesIsChecked}"-->
           <CheckBox Margin="4"
+                    Command="{Binding $parent[Window].DataContext.ChengesIsChecked}"
                     IsChecked="{Binding IsChecked}"
                     Content="{Binding Description}"/>
         </DataTemplate>
