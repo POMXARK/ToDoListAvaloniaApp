@@ -27,6 +27,11 @@ namespace ToDoListAvaloniaApp.ViewModels
 
         public ReadOnlyObservableCollection<FootballPlayer> AvailablePlayers => _availablePlayers;
 
+
+        private readonly ReadOnlyObservableCollection<TodoItem> _availableTodo;
+
+        public ReadOnlyObservableCollection<TodoItem> AvailableTodo => _availableTodo;
+
         public MainWindowViewModel(Database db)
         {
             ReactiveCommand<bool, Unit> command = ReactiveCommand.Create<bool>(
@@ -88,6 +93,11 @@ namespace ToDoListAvaloniaApp.ViewModels
                 .Bind(out _availablePlayers)
                 .Subscribe();
 
+            CreateTodoList(db)
+                .Connect()
+                .Bind(out _availableTodo)
+                .Subscribe();
+
         }
 
 
@@ -139,20 +149,13 @@ namespace ToDoListAvaloniaApp.ViewModels
             return people;
         }
 
-    }
-
-
-    /// <summary>
-    /// Класс модели
-    /// </summary>
-    public class FootballPlayer
-    {
-        public string Name { get; }
-
-        public FootballPlayer(string name)
+        private ISourceList<TodoItem> CreateTodoList(Database db)
         {
-            Name = name;
+            var todo = new SourceList<TodoItem>();
+            todo.AddRange(db.GetItems());
+            return todo;
         }
+
     }
 
 }
