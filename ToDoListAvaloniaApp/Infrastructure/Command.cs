@@ -3,6 +3,9 @@ using System.Windows.Input;
 
 namespace ToDoListAvaloniaApp.Infrastructure
 {
+    /// <summary>
+    /// Устаревшая реализация лучше использовать  ReactiveCommand
+    /// </summary>
     public class Command : ICommand
     {
         private readonly Action _execute;
