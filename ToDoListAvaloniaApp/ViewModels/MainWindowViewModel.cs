@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Reactive;
+using System.Reactive.Disposables;
 using System.Reactive.Linq;
 using DynamicData;
 using ReactiveUI;
@@ -9,6 +11,7 @@ using ReactiveUI.Fody.Helpers;
 using ToDoListAvaloniaApp.Data;
 using ToDoListAvaloniaApp.Models;
 using ToDoListAvaloniaApp.Services;
+using ToDoListAvaloniaApp.Infrastructure;
 
 namespace ToDoListAvaloniaApp.ViewModels
 {
@@ -88,15 +91,20 @@ namespace ToDoListAvaloniaApp.ViewModels
 
 
 
-            CreateFootballerList()
-                .Connect()
+            //Load available players
+            CreateFootballerList().Connect()
+                .FilterOnObservable(person => person.IncludedChanged, included => !included)
                 .Bind(out _availablePlayers)
                 .Subscribe();
 
             CreateTodoList(db)
                 .Connect()
                 .Bind(out _availableTodo)
-                .Subscribe();
+                .Subscribe(
+
+                _ => Debug.WriteLine(" CreateTodoList")
+
+                ); 
 
         }
 
@@ -157,5 +165,4 @@ namespace ToDoListAvaloniaApp.ViewModels
         }
 
     }
-
 }

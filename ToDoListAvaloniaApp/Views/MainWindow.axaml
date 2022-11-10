@@ -15,16 +15,27 @@
   </Design.DataContext>
 
   <StackPanel>
-    
-    <ItemsControl 
-                  Items="{Binding AvailablePlayers}">
+
+    <ItemsControl Grid.Row="1"
+                  Grid.Column="0"
+                  Items="{Binding AvailablePlayers}"
+                  ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto">
       <ItemsControl.ItemTemplate>
-        <DataTemplate DataType="{x:Type m:FootballPlayer}">
-          <Grid>
-            <TextBlock Text="{Binding Name}" />
+
+        <DataTemplate  DataType="{x:Type m:FootballPlayer}">
+          <Grid VerticalAlignment="Top">
+            <Grid.ColumnDefinitions>
+              <ColumnDefinition Width="*" />
+              <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="{Binding Name}" Margin="4 0 0 0" />
+            <Button Grid.Column="1" Command="{Binding IncludeCommand}" Content="+"/>
           </Grid>
         </DataTemplate>
       </ItemsControl.ItemTemplate>
+
     </ItemsControl>
     
     <Label/>
@@ -34,7 +45,7 @@
       <ItemsControl.ItemTemplate>
         <DataTemplate DataType="{x:Type m:TodoItem}">
           <Grid>
-            <TextBlock Text="{Binding Description}" />
+            <CheckBox Content="{Binding Description}" IsChecked="{Binding IsChecked}"/>
           </Grid>
         </DataTemplate>
       </ItemsControl.ItemTemplate>
